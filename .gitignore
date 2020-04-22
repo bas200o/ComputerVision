@@ -3,8 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-!dependencies/*
-!dependencies/opencv/build/x64/vc15/lib/*
+!ComputerVision/dependencies/*
+!ComputerVision/dependencies/opencv/build/x64/vc15/lib/*
 
 # User-specific files
 *.rsuser
