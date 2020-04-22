@@ -22,9 +22,9 @@ using namespace std;
 
 
 /// Globale Variabelen voor de slider 
-const int threshold_slider_max = 255;
-int threshold_slider = 100;
-int thresholdvalue = 100;
+const int area_slider_max = 20000;
+int default_area_sider = 4000;
+int areasizevalue = 100;
 
 Mat gray_image;
 Mat binaryx;
@@ -34,10 +34,10 @@ Mat binaryx;
 void on_trackbar(int, void*)
 {
 	// waarde ophalen van de slider
-	thresholdvalue = threshold_slider;
+	areasizevalue = default_area_sider;
 
 	// met verkregen waarde een operatie uitvoeren
-	threshold(gray_image, binaryx, thresholdvalue, 1, CV_THRESH_BINARY);
+	threshold(gray_image, binaryx, areasizevalue, 1, CV_THRESH_BINARY);
 
 	// nieuwe resultaat tonen
 	imshow("binair beeld", binaryx * 255);
@@ -57,12 +57,6 @@ int main()
 		cout << "Could not open or find the image" << std::endl;
 		return -1;
 	}
-
-
-
-
-
-
 
 	// De afbeelding converteren naar een grijswaarde afbeelding
 	Mat gray_image;
@@ -116,12 +110,43 @@ int main()
 
 	// Toon alle informatie in de console 
 	cout << "Aantal gevonden BLOBs = " << firstpixelVec2.size() << endl;
-	for (int i = 0; i < firstpixelVec2.size(); i++) {
+	for (int i = 0; i < firstpixelVec2.size(); i++) 
+	{
 		cout << "BLOB " << i + 1 << endl;
 		cout << "firstpixel = (" << firstpixelVec2[i]->x << "," << firstpixelVec2[i]->y << ")" << endl;
 		cout << "centre = (" << posVec2[i]->x << "," << posVec2[i]->y << ")" << endl;
 		cout << "area = " << areaVec2[i] << endl;
 	}
+
+
+	// Rechtstreeks aanroepen van de callback functie om het eerste beeld te krijgen
+	on_trackbar(areasizevalue, 0);
+
+
+	// Toon alle informatie in de console 
+	cout << "gevonden BLOBs met formaat kleiner dan 5000" << endl;
+	for (int i = 0; i < firstpixelVec2.size(); i++) 
+	{
+		if (areaVec2[i] < 5000) 
+		{
+			cout << "BLOB " << i + 1 << endl;
+			cout << "firstpixel = (" << firstpixelVec2[i]->x << "," << firstpixelVec2[i]->y << ")" << endl;
+			cout << "centre = (" << posVec2[i]->x << "," << posVec2[i]->y << ")" << endl;
+			cout << "area = " << areaVec2[i] << endl;
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 	cout << endl << "*******************************************" << endl << endl;
 
