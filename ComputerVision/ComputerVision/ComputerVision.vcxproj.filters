@@ -18,5 +18,13 @@
     <ClCompile Include="ComputerVision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="blobdetectionavans.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="blobdetectionavans.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

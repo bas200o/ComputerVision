@@ -31,8 +31,6 @@
 #ifndef OPENCV_FLANN_RESULTSET_H
 #define OPENCV_FLANN_RESULTSET_H
 
-//! @cond IGNORED
-
 #include <algorithm>
 #include <cstring>
 #include <iostream>
@@ -111,13 +109,13 @@ public:
         return count;
     }
 
-    bool full() const CV_OVERRIDE
+    bool full() const
     {
         return count == capacity;
     }
 
 
-    void addPoint(DistanceType dist, int index) CV_OVERRIDE
+    void addPoint(DistanceType dist, int index)
     {
         if (dist >= worst_distance_) return;
         int i;
@@ -141,7 +139,7 @@ public:
         worst_distance_ = dists[capacity-1];
     }
 
-    DistanceType worstDist() const CV_OVERRIDE
+    DistanceType worstDist() const
     {
         return worst_distance_;
     }
@@ -178,13 +176,13 @@ public:
         return count;
     }
 
-    bool full() const CV_OVERRIDE
+    bool full() const
     {
         return count == capacity;
     }
 
 
-    void addPoint(DistanceType dist, int index) CV_OVERRIDE
+    void addPoint(DistanceType dist, int index)
     {
         if (dist >= worst_distance_) return;
         int i;
@@ -217,7 +215,7 @@ public:
         worst_distance_ = dists[capacity-1];
     }
 
-    DistanceType worstDist() const CV_OVERRIDE
+    DistanceType worstDist() const
     {
         return worst_distance_;
     }
@@ -303,7 +301,7 @@ public:
         unsigned int index_;
     };
 
-    /** Default constructor */
+    /** Default cosntructor */
     UniqueResultSet() :
         is_full_(false), worst_distance_(std::numeric_limits<DistanceType>::max())
     {
@@ -312,7 +310,7 @@ public:
     /** Check the status of the set
      * @return true if we have k NN
      */
-    inline bool full() const CV_OVERRIDE
+    inline bool full() const
     {
         return is_full_;
     }
@@ -367,7 +365,7 @@ public:
      * If we don't have enough neighbors, it returns the max possible value
      * @return
      */
-    inline DistanceType worstDist() const CV_OVERRIDE
+    inline DistanceType worstDist() const
     {
         return worst_distance_;
     }
@@ -404,7 +402,7 @@ public:
      * @param dist distance for that neighbor
      * @param index index of that neighbor
      */
-    inline void addPoint(DistanceType dist, int index) CV_OVERRIDE
+    inline void addPoint(DistanceType dist, int index)
     {
         // Don't do anything if we are worse than the worst
         if (dist >= worst_distance_) return;
@@ -424,7 +422,7 @@ public:
 
     /** Remove all elements in the set
      */
-    void clear() CV_OVERRIDE
+    void clear()
     {
         dist_indices_.clear();
         worst_distance_ = std::numeric_limits<DistanceType>::max();
@@ -463,14 +461,14 @@ public:
      * @param dist distance for that neighbor
      * @param index index of that neighbor
      */
-    void addPoint(DistanceType dist, int index) CV_OVERRIDE
+    void addPoint(DistanceType dist, int index)
     {
         if (dist <= radius_) dist_indices_.insert(DistIndex(dist, index));
     }
 
     /** Remove all elements in the set
      */
-    inline void clear() CV_OVERRIDE
+    inline void clear()
     {
         dist_indices_.clear();
     }
@@ -479,7 +477,7 @@ public:
     /** Check the status of the set
      * @return alwys false
      */
-    inline bool full() const CV_OVERRIDE
+    inline bool full() const
     {
         return true;
     }
@@ -488,7 +486,7 @@ public:
      * If we don't have enough neighbors, it returns the max possible value
      * @return
      */
-    inline DistanceType worstDist() const CV_OVERRIDE
+    inline DistanceType worstDist() const
     {
         return radius_;
     }
@@ -541,7 +539,5 @@ private:
     DistanceType radius_;
 };
 }
-
-//! @endcond
 
 #endif //OPENCV_FLANN_RESULTSET_H
