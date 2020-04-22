@@ -49,7 +49,7 @@ int main()
 
 
 	// Mat is een class voor objecten waarin een afbeelding kan worden opgeslagen.
-	Mat image = imread("C:/Users/baswi/Documents/git/ComputerVision/ComputerVision/Images/ballen.jpg");
+	Mat image = imread("../Images/ballen.jpg");
 
 	// Controleer of alles goed is gegaan
 	if (!image.data)
@@ -120,7 +120,7 @@ int main()
 
 
 	// Rechtstreeks aanroepen van de callback functie om het eerste beeld te krijgen
-	on_trackbar(areasizevalue, 0);
+	//on_trackbar(areasizevalue, 0);
 
 
 	// Toon alle informatie in de console 
@@ -137,8 +137,7 @@ int main()
 	}
 
 
-
-
+	show16SImageStretch(labeledImage2, "Labeled Image 2");
 
 
 
