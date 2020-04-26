@@ -13,8 +13,6 @@ using namespace cv;
 
 /// Globale Variabelen voor de slider 
 int area_slider_max = 0;
-int default_area_sider = 4000;
-int areasizevalue = 100;
 int minAreaSize = 0;
 int maxAreaSize;
 
