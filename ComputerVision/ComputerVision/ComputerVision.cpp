@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
 	for (int i = 1; i < 10; i++) {
 		erode(binary_image, erosion_dst, element);
 
-		imshow("Erosion", erosion_dst * 255);
+		imshow("cameraPicture", erosion_dst * 255);
 		binary_image = erosion_dst;
 	}
 
