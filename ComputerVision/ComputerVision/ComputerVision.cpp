@@ -113,8 +113,6 @@ int main(int argc, char* argv[])
 	vector<int> areaVec;
 	labelBLOBsInfo(binary16S, blobImage, firstpixelVec, posVec, areaVec);
 
-	std::cout << std::endl << "*******************************************" << std::endl << std::endl;
-
 	// Print console info
 	std::cout << "Found BLOBs = " << firstpixelVec.size() << std::endl;
 	for (int i = 0; i < firstpixelVec.size(); i++) {
