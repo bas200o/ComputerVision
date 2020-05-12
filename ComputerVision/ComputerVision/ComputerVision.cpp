@@ -1,12 +1,8 @@
-// ************************************************************************************************************************************************
-// ********************************************** Camera ******************************************************************************************
-// ************************************************************************************************************************************************
+/*
+	This program uses a usb camera to read objects from the video feed.
 
-// Dit programma leest continue een camera beeld in en toont deze op het scherm
-// Bij sommige camera's is het beeld gespiegeld. Dit kan worden opgelost 
-// met de flip-functie van OpenCV.
-// 
-// Jan Oostindie, dd 22-2-2015
+	Bas Winkelhof, 2020-5-12
+*/
 
 #include <opencv2/opencv.hpp>
 #include "opencv2/imgproc/imgproc.hpp" 
@@ -73,7 +69,6 @@ void on_trackbar(int, void*)
 int main(int argc, char* argv[])
 {
 	Mat image = getCameraImg();
-	namedWindow("Press esc to threshold picture", CV_WINDOW_AUTOSIZE);
 
 	//convert to grey value image
 	cvtColor(image, gray_image, CV_BGR2GRAY);
@@ -81,20 +76,21 @@ int main(int argc, char* argv[])
 	//convert to binary image
 	threshold(gray_image, binary_image, 100, 1, CV_THRESH_BINARY_INV);
 
+	//show image windows and add trackbar for threshold
+	namedWindow("Press esc to threshold picture", CV_WINDOW_AUTOSIZE);
 	imshow("Press esc to threshold picture", binary_image*255);
 	createTrackbar("Threshold", "Press esc to threshold picture", &threshold_slider, threshold_slider_max, on_trackbar);
 	on_trackbar(threshold_slider, 0);
 
 	while (true)
 	{
-		if (waitKey(1) == 27) {
+		if (waitKey(1) == 27) // 27 = esc key
+		{
 			destroyWindow("Press esc to threshold picture");
 			break;
 		}
 	}
 
-	namedWindow("cameraPicture", CV_WINDOW_AUTOSIZE);
-	imshow("cameraPicture", binary_image);
 
 	Mat element = getStructuringElement(MORPH_RECT, Size(3, 3), Point(-1, -1));
 	Mat dilation_dst, erosion_dst;
@@ -102,9 +98,11 @@ int main(int argc, char* argv[])
 	for (int i = 1; i < 10; i++) {
 		erode(binary_image, erosion_dst, element);
 
-		imshow("cameraPicture", erosion_dst * 255);
 		binary_image = erosion_dst;
 	}
+
+	namedWindow("cameraPicture", CV_WINDOW_AUTOSIZE);
+	imshow("cameraPicture", erosion_dst * 255);
 
 	Mat blobImage;
 	Mat binary16S;
