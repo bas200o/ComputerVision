@@ -26,7 +26,7 @@ Gets a image from the camera when the user presses ESC
 Mat getCameraImg()
 {
 	//Open camera 0 
-	VideoCapture cap(0);
+	VideoCapture cap(1);
 
 	//Mat object for return type
 	Mat img;
