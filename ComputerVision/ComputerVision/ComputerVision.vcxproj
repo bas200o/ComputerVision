@@ -179,11 +179,13 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundRemover.cpp" />
     <ClCompile Include="blobdetectionavans.cpp" />
     <ClCompile Include="ComputerVision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blobdetectionavans.h" />
+    <ClInclude Include="BackgroundRemover.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
